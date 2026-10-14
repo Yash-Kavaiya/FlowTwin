@@ -1,0 +1,58 @@
+{
+  "provider": "kokoro",
+  "speed": "1.0",
+  "lines": [
+    {
+      "id": "01",
+      "text": "A pallet in the wrong aisle. A delivery, stalled. And nobody knows, until someone picks up the radio."
+    },
+    {
+      "id": "02",
+      "text": "FlowTwin sees it. Replans the delivery. And shows you the evidence."
+    },
+    {
+      "id": "03",
+      "text": "This is a live three-D twin of the floor. Racking, docks, conveyors. And a camera watching the aisles."
+    },
+    {
+      "id": "04",
+      "text": "Start a delivery. It takes aisle A. Now put a real object in that aisle. Three consistent observations, and the aisle is blocked. The route moves to aisle B."
+    },
+    {
+      "id": "05",
+      "text": "Block both aisles, and it does not guess. It holds at the wait point, and says there is no feasible route."
+    },
+    {
+      "id": "06",
+      "text": "Three rules it will not break. A missed detection never clears an aisle. A covered camera turns every zone unknown. And every decision keeps the frame that caused it."
+    },
+    {
+      "id": "07",
+      "text": "Perception is built for NVIDIA Jetson Thor. A detector on CUDA. A TensorRT export. And a panel that reports only what the device measured."
+    },
+    {
+      "id": "08",
+      "text": "Around that loop: a fleet that obeys the same zones. Live numbers, counted from the session. And stock on every rack, down to the slot."
+    },
+    {
+      "id": "09",
+      "text": "The same loop, on three floors. A warehouse aisle. A cross-dock lane. A factory corridor."
+    },
+    {
+      "id": "10",
+      "text": "Across seven fixed scenarios, replanning finished in one hundred sixty-four simulated seconds, against two hundred twelve for a fixed route. In one scenario waiting wins. So we show it."
+    },
+    {
+      "id": "11",
+      "text": "The buyer is an operations manager. The first step is a four-week advisory pilot on one aisle. Baseline. Shadow mode. Measured recommendations. Review."
+    },
+    {
+      "id": "12",
+      "text": "One camera. Three prop classes. A simulated vehicle, and it says so on screen. FlowTwin. See it. Replan it. Prove it."
+    }
+  ],
+  "bgm": {
+    "mode": "none"
+  },
+  "voice": "am_michael"
+}

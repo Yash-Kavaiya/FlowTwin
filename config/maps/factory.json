@@ -1,0 +1,291 @@
+{
+  "id": "factory",
+  "name": "Factory line-side delivery",
+  "use_case": {
+    "buyer": "Plant logistics or production supervisor",
+    "problem": "A tugger carrying a kit to the assembly station meets a parked cart in the main corridor, and the line waits for parts.",
+    "response": "The main corridor is marked blocked and the kit goes round by the north corridor. If the cell entry is blocked the tugger holds at the junction outside the cell.",
+    "metric": "Line-side stock-outs avoided per shift"
+  },
+  "version": 1,
+  "width": 100,
+  "height": 56,
+  "speed": 8.0,
+  "turn_cost_s": 0.5,
+  "nodes": [
+    {
+      "id": "K",
+      "label": "Kitting store",
+      "kind": "storage",
+      "x": 8,
+      "y": 44
+    },
+    {
+      "id": "J1",
+      "label": "Junction 1",
+      "kind": "wait",
+      "x": 24,
+      "y": 44
+    },
+    {
+      "id": "N1",
+      "label": "North in",
+      "kind": "aisle",
+      "x": 24,
+      "y": 10
+    },
+    {
+      "id": "N2",
+      "label": "North out",
+      "kind": "aisle",
+      "x": 72,
+      "y": 10
+    },
+    {
+      "id": "J2",
+      "label": "Junction 2",
+      "kind": "wait",
+      "x": 72,
+      "y": 44
+    },
+    {
+      "id": "X",
+      "label": "Cell entry",
+      "kind": "packing",
+      "x": 90,
+      "y": 44
+    },
+    {
+      "id": "L",
+      "label": "Assembly station",
+      "kind": "dispatch",
+      "x": 90,
+      "y": 24
+    }
+  ],
+  "edges": [
+    {
+      "a": "K",
+      "b": "J1"
+    },
+    {
+      "a": "J1",
+      "b": "J2",
+      "zone": "A"
+    },
+    {
+      "a": "J1",
+      "b": "N1"
+    },
+    {
+      "a": "N1",
+      "b": "N2",
+      "zone": "B"
+    },
+    {
+      "a": "N2",
+      "b": "J2"
+    },
+    {
+      "a": "J2",
+      "b": "X",
+      "zone": "C"
+    },
+    {
+      "a": "X",
+      "b": "L"
+    }
+  ],
+  "zones": [
+    {
+      "id": "A",
+      "label": "Main corridor",
+      "polygon": [
+        [
+          28,
+          39
+        ],
+        [
+          68,
+          39
+        ],
+        [
+          68,
+          49
+        ],
+        [
+          28,
+          49
+        ]
+      ]
+    },
+    {
+      "id": "B",
+      "label": "North corridor",
+      "polygon": [
+        [
+          28,
+          5
+        ],
+        [
+          68,
+          5
+        ],
+        [
+          68,
+          15
+        ],
+        [
+          28,
+          15
+        ]
+      ]
+    },
+    {
+      "id": "C",
+      "label": "Cell approach",
+      "polygon": [
+        [
+          75,
+          39
+        ],
+        [
+          87,
+          39
+        ],
+        [
+          87,
+          49
+        ],
+        [
+          75,
+          49
+        ]
+      ]
+    }
+  ],
+  "structures": [
+    {
+      "kind": "machine",
+      "label": "Press cell",
+      "x": 35,
+      "y": 27,
+      "w": 11,
+      "d": 14,
+      "h": 8
+    },
+    {
+      "kind": "machine",
+      "label": "Weld cell",
+      "x": 49,
+      "y": 27,
+      "w": 11,
+      "d": 14,
+      "h": 6
+    },
+    {
+      "kind": "machine",
+      "label": "Paint booth",
+      "x": 63,
+      "y": 27,
+      "w": 11,
+      "d": 14,
+      "h": 9
+    },
+    {
+      "kind": "conveyor",
+      "label": "Assembly line",
+      "x": 90,
+      "y": 13,
+      "w": 16,
+      "d": 3,
+      "h": 2
+    },
+    {
+      "kind": "rack",
+      "label": "Kit shelves",
+      "x": 9,
+      "y": 52,
+      "w": 14,
+      "d": 3,
+      "h": 5
+    },
+    {
+      "kind": "bench",
+      "x": 97,
+      "y": 24,
+      "w": 3,
+      "d": 8,
+      "h": 2
+    }
+  ],
+  "order": {
+    "source": "K",
+    "dest": "L"
+  },
+  "workers": [
+    {
+      "path": [
+        [
+          28,
+          18
+        ],
+        [
+          70,
+          18
+        ],
+        [
+          70,
+          20
+        ],
+        [
+          28,
+          20
+        ]
+      ],
+      "speed": 1.4
+    },
+    {
+      "path": [
+        [
+          82,
+          6
+        ],
+        [
+          98,
+          6
+        ],
+        [
+          98,
+          20
+        ],
+        [
+          82,
+          20
+        ]
+      ],
+      "speed": 1.2
+    },
+    {
+      "path": [
+        [
+          4,
+          50
+        ],
+        [
+          18,
+          50
+        ],
+        [
+          18,
+          36
+        ],
+        [
+          4,
+          36
+        ]
+      ],
+      "speed": 1.3
+    }
+  ]
+}

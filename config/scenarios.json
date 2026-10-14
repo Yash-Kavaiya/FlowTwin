@@ -1,0 +1,12 @@
+{
+  "note": "Fixed scenario set for the static-vs-dynamic comparison, valid for every map: zone A is on the primary route, zone B on the alternate, zone C on the shared final segment. Times are simulated seconds; schedule entries are [time, zone, state].",
+  "scenarios": [
+    {"name": "no disruption", "schedule": []},
+    {"name": "primary route blocked 30 s", "schedule": [[1, "A", "BLOCKED"], [31, "A", "CLEAR"]]},
+    {"name": "primary route blocked 10 s", "schedule": [[1, "A", "BLOCKED"], [11, "A", "CLEAR"]]},
+    {"name": "primary route blocked 3 s", "schedule": [[1, "A", "BLOCKED"], [4, "A", "CLEAR"]]},
+    {"name": "block appears while inside primary zone", "schedule": [[6, "A", "BLOCKED"], [20, "A", "CLEAR"]]},
+    {"name": "both routes blocked, alternate clears first", "schedule": [[1, "A", "BLOCKED"], [1, "B", "BLOCKED"], [12, "B", "CLEAR"], [40, "A", "CLEAR"]]},
+    {"name": "shared segment blocked 8 s (no alternative)", "schedule": [[1, "C", "BLOCKED"], [9, "C", "CLEAR"]]}
+  ]
+}

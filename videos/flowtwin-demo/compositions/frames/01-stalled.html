@@ -1,0 +1,250 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Heebo";
+      font-weight: 800;
+      font-style: normal;
+      font-display: block;
+      src: url("assets/fonts/Heebo-ExtraBold.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "IBM Plex Mono";
+      font-weight: 400;
+      font-style: normal;
+      font-display: block;
+      src: url("assets/fonts/IBMPlexMono-Regular.woff2") format("woff2");
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      color: #ffffff;
+    }
+
+    /* full-bleed ground: its own clip layer, never the root */
+    [id="01-stalled-ground"] {
+      position: absolute;
+      inset: 0;
+      background: #0a0a0a;
+    }
+
+    [id="01-stalled-stage"] {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* mono kicker, top-left chrome */
+    [id="01-stalled-kicker"] {
+      position: absolute;
+      left: 106px;
+      top: 106px;
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #bfd732;
+      white-space: nowrap;
+    }
+
+    /* the one in-place statement slot: three nested motion wrappers, one text node */
+    [id="01-stalled-slam"] {
+      position: absolute;
+      left: 106px;
+      top: 330px;
+      transform-origin: 0% 50%;
+    }
+    [id="01-stalled-text"] {
+      font-family: "Heebo", sans-serif;
+      font-weight: 800;
+      font-size: 88px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      text-transform: lowercase;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    [id="01-stalled-stage"][data-beat="3"] [id="01-stalled-text"] {
+      font-size: 208px;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+    }
+
+    /* 36x2 stub rule: beat 2 only */
+    [id="01-stalled-rule"] {
+      position: absolute;
+      left: 106px;
+      top: 456px;
+      width: 36px;
+      height: 2px;
+      background: #bfd732;
+      transform-origin: 0% 50%;
+      visibility: hidden;
+    }
+    [id="01-stalled-stage"][data-beat="2"] [id="01-stalled-rule"] {
+      visibility: visible;
+    }
+
+    /* resolving line, lime, per word */
+    [id="01-stalled-resolve"] {
+      position: absolute;
+      left: 106px;
+      top: 584px;
+      font-family: "Heebo", sans-serif;
+      font-weight: 800;
+      font-size: 88px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      text-transform: lowercase;
+      color: #bfd732;
+      white-space: nowrap;
+    }
+    [class~="01-stalled-word"] {
+      display: inline-block;
+      margin-right: 0.24em;
+    }
+  </style>
+
+  <div id="root" data-composition-id="01-stalled" data-width="1920" data-height="1080" data-duration="7.184">
+    <div
+      id="01-stalled-ground"
+      class="clip"
+      data-start="0"
+      data-duration="7.184"
+      data-track-index="0"
+    ></div>
+
+    <div
+      id="01-stalled-stage"
+      class="clip"
+      data-start="0"
+      data-duration="7.184"
+      data-track-index="1"
+      data-beat="1"
+    >
+      <div id="01-stalled-kicker">The problem</div>
+
+      <div id="01-stalled-slam">
+        <div id="01-stalled-snap">
+          <div id="01-stalled-rise">
+            <div id="01-stalled-text">a pallet in the wrong aisle.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="01-stalled-rule"></div>
+
+      <div id="01-stalled-resolve">
+        <span class="01-stalled-word">until</span><span class="01-stalled-word">the</span
+        ><span class="01-stalled-word">radio</span><span class="01-stalled-word">call.</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      window.__timelines = window.__timelines || {};
+
+      var DURATION = 6.784;
+      // One beat array drives every swap and entrance.
+      var BEATS = [0.0, 2.0, 3.7];
+      // Per-word cues for the resolving line (VO: "until someone picks up the radio").
+      var WORD_CUES = [4.85, 5.2, 5.55, 5.9];
+
+      // Whole-state swaps at time thresholds (hard cuts, no tween between states).
+      var SEQUENCE = [
+        { t: BEATS[0], beat: "1", text: "a pallet in the wrong aisle." },
+        { t: BEATS[1], beat: "2", text: "a delivery, stalled." },
+        { t: BEATS[2], beat: "3", text: "nobody knows" },
+      ];
+
+      var stage = document.getElementById("01-stalled-stage");
+      var textEl = document.getElementById("01-stalled-text");
+      var slam = document.getElementById("01-stalled-slam");
+      var snap = document.getElementById("01-stalled-snap");
+      var rise = document.getElementById("01-stalled-rise");
+      var rule = document.getElementById("01-stalled-rule");
+      var kicker = document.getElementById("01-stalled-kicker");
+      var words = stage.querySelectorAll('[class~="01-stalled-word"]');
+
+      function stateAt(time) {
+        for (var i = SEQUENCE.length - 1; i >= 0; i--) {
+          if (time >= SEQUENCE[i].t) return SEQUENCE[i];
+        }
+        return SEQUENCE[0];
+      }
+
+      var tl = gsap.timeline({ paused: true });
+
+      // Discrete state driver: reverse-search the sequence every frame (seek-safe).
+      var driver = { t: 0 };
+      tl.to(
+        driver,
+        {
+          t: DURATION,
+          duration: DURATION,
+          ease: "none",
+          onUpdate: function () {
+            var s = stateAt(driver.t);
+            if (textEl.textContent !== s.text) textEl.textContent = s.text;
+            if (stage.getAttribute("data-beat") !== s.beat) stage.setAttribute("data-beat", s.beat);
+          },
+        },
+        0,
+      );
+
+      // Beat 1 — scale + blur slam.
+      tl.fromTo(
+        slam,
+        { scale: 1.16, filter: "blur(14px)", opacity: 0 },
+        { scale: 1, filter: "blur(0px)", opacity: 1, duration: 0.5, ease: "power4.out" },
+        BEATS[0],
+      );
+
+      // Beat 2 — hard cut in place, side snap; stub rule draws under it.
+      tl.fromTo(
+        snap,
+        { x: -64 },
+        { x: 0, duration: 0.42, ease: "expo.out", immediateRender: false },
+        BEATS[1],
+      );
+      tl.fromTo(
+        rule,
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.4, ease: "power3.out" },
+        BEATS[1] + 0.3,
+      );
+
+      // Beat 3 — hard cut to the big line, heavy rise; kicker arrives with it.
+      tl.fromTo(
+        rise,
+        { y: 72 },
+        { y: 0, duration: 0.5, ease: "circ.out", immediateRender: false },
+        BEATS[2],
+      );
+      tl.fromTo(
+        kicker,
+        { opacity: 0, x: -14 },
+        { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" },
+        BEATS[2] + 0.1,
+      );
+
+      // Resolving line — one word per VO cue, then a still hold to the cut.
+      for (var i = 0; i < words.length; i++) {
+        tl.fromTo(
+          words[i],
+          { opacity: 0, y: 26 },
+          { opacity: 1, y: 0, duration: 0.34, ease: "power3.out" },
+          WORD_CUES[i],
+        );
+      }
+
+      window.__timelines["01-stalled"] = tl;
+    })();
+  </script>
+</template>

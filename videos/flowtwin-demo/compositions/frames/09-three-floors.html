@@ -1,0 +1,304 @@
+<template>
+  <div
+    id="root"
+    data-composition-id="09-three-floors"
+    data-start="0"
+    data-duration="6.395"
+    data-width="1920"
+    data-height="1080"
+  >
+    <style>
+      @font-face {
+        font-family: "Heebo";
+        font-weight: 700;
+        font-style: normal;
+        font-display: block;
+        src: url("assets/fonts/Heebo-Bold.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-weight: 400;
+        font-style: normal;
+        font-display: block;
+        src: url("assets/fonts/IBMPlexMono-Regular.woff2") format("woff2");
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        container-type: size;
+      }
+
+      /* full-bleed ground lives on a clip layer, never on #root */
+      .three-floors-09-ground {
+        position: absolute;
+        inset: 0;
+        background: #0a0a0a;
+      }
+
+      .three-floors-09-stage {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* headline — h3 role, lowercase Heebo, centred on the upper third */
+      .three-floors-09-headline {
+        position: absolute;
+        left: 106px;
+        right: 106px;
+        top: 168px;
+        margin: 0;
+        text-align: center;
+        font-family: "Heebo", sans-serif;
+        font-weight: 700;
+        font-size: 54px;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        text-transform: lowercase;
+        color: #ffffff;
+        white-space: nowrap;
+      }
+      .three-floors-09-word {
+        display: inline-block;
+        margin: 0 0.13em;
+        will-change: transform;
+      }
+      .three-floors-09-word-accent {
+        color: #bfd732;
+      }
+
+      /* triptych — three equal slots, 544 x 380, 38px gaps, inside pad-x 106 */
+      .three-floors-09-slot {
+        position: absolute;
+        top: 318px;
+        width: 544px;
+        height: 380px;
+        box-sizing: border-box;
+        border: 1px solid #2c2c2c;
+        background: #141414;
+        overflow: hidden;
+      }
+      #three-floors-09-slot-1 {
+        left: 106px;
+      }
+      #three-floors-09-slot-2 {
+        left: 688px;
+      }
+      #three-floors-09-slot-3 {
+        left: 1270px;
+      }
+
+      /* the fill: a clipped window onto the real plate, cropped to the 3D scene */
+      .three-floors-09-fill {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        transform-origin: 50% 50%;
+        will-change: transform;
+      }
+      /* plate at 0.5x (960 x 540); window shows source x 232-1320, y 136-896 */
+      .three-floors-09-plate {
+        position: absolute;
+        left: -116px;
+        top: -68px;
+        width: 960px;
+        height: 540px;
+        max-width: none;
+        display: block;
+        transform-origin: 388px 258px;
+        will-change: transform;
+      }
+
+      /* mono captions */
+      .three-floors-09-caption {
+        position: absolute;
+        top: 722px;
+        width: 544px;
+        margin: 0;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 400;
+        font-size: 19px;
+        line-height: 1.4;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #ffffff;
+        white-space: nowrap;
+      }
+      #three-floors-09-caption-1 {
+        left: 106px;
+      }
+      #three-floors-09-caption-2 {
+        left: 688px;
+      }
+      #three-floors-09-caption-3 {
+        left: 1270px;
+      }
+
+      /* single lime rule spanning all three panels (outer edge to outer edge) */
+      .three-floors-09-rule {
+        position: absolute;
+        left: 106px;
+        top: 778px;
+        width: 1708px;
+        height: 4px;
+        overflow: visible;
+      }
+      .three-floors-09-rule path {
+        fill: none;
+        stroke: #bfd732;
+        stroke-width: 2;
+        stroke-linecap: butt;
+      }
+    </style>
+
+    <div
+      class="clip three-floors-09-ground"
+      data-start="0"
+      data-duration="6.395"
+      data-track-index="0"
+    ></div>
+
+    <div
+      class="clip three-floors-09-stage"
+      data-start="0"
+      data-duration="6.395"
+      data-track-index="1"
+    >
+      <h3 class="three-floors-09-headline">
+        <span class="three-floors-09-word">the</span
+        ><span class="three-floors-09-word">same</span
+        ><span class="three-floors-09-word">loop,</span
+        ><span class="three-floors-09-word">on</span
+        ><span class="three-floors-09-word three-floors-09-word-accent">three</span
+        ><span class="three-floors-09-word three-floors-09-word-accent">floors.</span>
+      </h3>
+
+      <div class="three-floors-09-slot" id="three-floors-09-slot-1">
+        <div class="three-floors-09-fill" id="three-floors-09-fill-1">
+          <img class="three-floors-09-plate" src="assets/03-reroute.png" alt="" />
+        </div>
+      </div>
+      <div class="three-floors-09-slot" id="three-floors-09-slot-2">
+        <div class="three-floors-09-fill" id="three-floors-09-fill-2">
+          <img class="three-floors-09-plate" src="assets/07-crossdock.png" alt="" />
+        </div>
+      </div>
+      <div class="three-floors-09-slot" id="three-floors-09-slot-3">
+        <div class="three-floors-09-fill" id="three-floors-09-fill-3">
+          <img class="three-floors-09-plate" src="assets/08-factory.png" alt="" />
+        </div>
+      </div>
+
+      <p class="three-floors-09-caption" id="three-floors-09-caption-1">Warehouse · Aisle</p>
+      <p class="three-floors-09-caption" id="three-floors-09-caption-2">Cross-dock · Lane</p>
+      <p class="three-floors-09-caption" id="three-floors-09-caption-3">Factory · Corridor</p>
+
+      <svg
+        class="three-floors-09-rule"
+        viewBox="0 0 1708 4"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path id="three-floors-09-rule-path" d="M 0 2 L 1708 2" />
+      </svg>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+
+        var root = document.querySelector('[data-composition-id="09-three-floors"]');
+        var q = function (sel) {
+          return Array.prototype.slice.call(root.querySelectorAll(sel));
+        };
+
+        /* ── Scene 1 (0.0–1.7s): headline per-word, start times computed from
+              word length (dynamic-content-sequencing: pre-computed once at build) ── */
+        var words = q(".three-floors-09-word");
+        var HEAD_AT = 0.12;
+        var BASE_DURATION = 0.11;
+        var SEC_PER_CHAR = 0.028;
+        var cumulative = HEAD_AT;
+        var WORD_TIMELINE = words.map(function (el) {
+          var start = cumulative;
+          cumulative += BASE_DURATION + el.textContent.length * SEC_PER_CHAR;
+          return { el: el, start: start };
+        });
+        WORD_TIMELINE.forEach(function (entry) {
+          tl.fromTo(
+            entry.el,
+            { opacity: 0, y: 22 },
+            { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" },
+            entry.start,
+          );
+        });
+
+        /* three empty hairline slots settle in beneath the headline */
+        q(".three-floors-09-slot").forEach(function (el, i) {
+          tl.fromTo(
+            el,
+            { opacity: 0, y: 14 },
+            { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+            0.55 + i * 0.12,
+          );
+        });
+
+        /* ── Scenes 2–4: each panel fills on its spoken floor
+              (spring-pop-entrance, smooth power3 settle, no overshoot) ── */
+        var FILL_AT = [1.75, 3.15, 4.45];
+        var POP_DUR = 0.65;
+        FILL_AT.forEach(function (at, i) {
+          var n = i + 1;
+          var fill = root.querySelector("#three-floors-09-fill-" + n);
+          var plate = fill.querySelector(".three-floors-09-plate");
+          var caption = root.querySelector("#three-floors-09-caption-" + n);
+
+          tl.fromTo(
+            fill,
+            { scale: 0, opacity: 0 },
+            { scale: 1, opacity: 1, duration: POP_DUR, ease: "power3.out" },
+            at,
+          );
+          /* the plate eases back inside its window as the panel lands */
+          tl.fromTo(
+            plate,
+            { scale: 1.1 },
+            { scale: 1, duration: 1.2, ease: "power2.out" },
+            at,
+          );
+          tl.fromTo(
+            caption,
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
+            at + 0.22,
+          );
+        });
+
+        /* ── Scene 4 close: one lime rule draws under all three (svg-path-draw) ── */
+        var rule = root.querySelector("#three-floors-09-rule-path");
+        var len = 1708;
+        try {
+          var measured = rule.getTotalLength();
+          if (measured > 0) len = measured;
+        } catch (e) {}
+        rule.style.strokeDasharray = String(len);
+        rule.style.strokeDashoffset = String(len);
+        tl.fromTo(
+          rule,
+          { strokeDashoffset: len },
+          { strokeDashoffset: 0, duration: 0.7, ease: "power2.out" },
+          4.95,
+        );
+
+        /* hold still to the end of the frame */
+        tl.to({}, { duration: 0.001 }, 5.994);
+
+        window.__timelines["09-three-floors"] = tl;
+      })();
+    </script>
+  </div>
+</template>

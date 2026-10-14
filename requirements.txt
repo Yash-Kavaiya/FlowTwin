@@ -1,0 +1,8 @@
+# Laptop development only. On the Jetson, dry-run every install first and stop
+# if torch, torchvision or numpy would change (see README.md section 3).
+fastapi
+uvicorn
+numpy
+opencv-python
+pytest
+httpx

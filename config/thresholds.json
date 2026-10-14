@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "block_frames": 3,
+  "clear_frames": 5,
+  "clear_seconds": 1.5,
+  "stale_seconds": 3.0,
+  "conf": 0.35,
+  "imgsz": 640,
+  "supported_classes": ["book", "bottle", "cup"],
+  "min_zone_overlap": 0.15,
+  "min_brightness": 25,
+  "min_sharpness": 5,
+  "max_frame_bytes": 1500000,
+  "max_frame_side": 1280
+}

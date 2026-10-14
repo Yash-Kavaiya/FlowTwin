@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -9 108 69" width="270.0mm" height="172.5mm" font-family="Arial, sans-serif">
+<rect x="-4" y="-9" width="108" height="69" fill="white"/>
+<text x="0" y="-4.5" font-size="3.2" font-weight="bold">FlowTwin: Warehouse aisle dispatch</text>
+<rect x="0" y="0" width="100" height="56" fill="none" stroke="black" stroke-width="0.4"/>
+<rect x="30.0" y="19.25" width="36" height="3.5" fill="#e6e6e6"/>
+<text x="48" y="21.8" font-size="1.9" text-anchor="middle" fill="#666666">High-bay racking</text>
+<rect x="30.0" y="26.25" width="36" height="3.5" fill="#e6e6e6"/>
+<rect x="30.0" y="33.25" width="36" height="3.5" fill="#e6e6e6"/>
+<rect x="30.0" y="0.7000000000000002" width="36" height="3" fill="#e6e6e6"/>
+<rect x="30.0" y="52.1" width="36" height="3" fill="#e6e6e6"/>
+<rect x="0.19999999999999996" y="30.0" width="2" height="24" fill="#e6e6e6"/>
+<text x="1.2" y="42.8" font-size="1.9" text-anchor="middle" fill="#666666">Receiving docks</text>
+<rect x="3.0" y="33.5" width="12" height="5" fill="#e6e6e6"/>
+<text x="9" y="36.8" font-size="1.9" text-anchor="middle" fill="#666666">Inbound trailer</text>
+<rect x="4.5" y="42.5" width="5" height="5" fill="#e6e6e6"/>
+<text x="7" y="45.8" font-size="1.9" text-anchor="middle" fill="#666666">Inbound staging</text>
+<rect x="11.0" y="42.5" width="5" height="5" fill="#e6e6e6"/>
+<rect x="4.5" y="49.0" width="5" height="5" fill="#e6e6e6"/>
+<rect x="11.0" y="49.0" width="5" height="5" fill="#e6e6e6"/>
+<rect x="3.5" y="7.5" width="5" height="5" fill="#e6e6e6"/>
+<rect x="10.5" y="7.5" width="5" height="5" fill="#e6e6e6"/>
+<rect x="8.5" y="1.0" width="7" height="4" fill="#e6e6e6"/>
+<text x="12" y="3.8" font-size="1.9" text-anchor="middle" fill="#666666">Charging bay</text>
+<rect x="77.5" y="29.0" width="3" height="18" fill="#e6e6e6"/>
+<text x="79" y="38.8" font-size="1.9" text-anchor="middle" fill="#666666">Outbound conveyor</text>
+<rect x="93.0" y="13.0" width="4" height="8" fill="#e6e6e6"/>
+<text x="95" y="17.8" font-size="1.9" text-anchor="middle" fill="#666666">Packing stations</text>
+<rect x="93.0" y="23.0" width="4" height="8" fill="#e6e6e6"/>
+<rect x="86.0" y="1.5" width="12" height="9" fill="#e6e6e6"/>
+<text x="92" y="6.8" font-size="1.9" text-anchor="middle" fill="#666666">Control room</text>
+<rect x="78.0" y="53.6" width="20" height="2" fill="#e6e6e6"/>
+<text x="88" y="55.4" font-size="1.9" text-anchor="middle" fill="#666666">Dispatch docks</text>
+<rect x="93.5" y="36.5" width="5" height="13" fill="#e6e6e6"/>
+<text x="96" y="43.8" font-size="1.9" text-anchor="middle" fill="#666666">Outbound trailer</text>
+<line x1="8" y1="22" x2="24" y2="22" stroke="#bbbbbb" stroke-width="3.4" stroke-linecap="round"/>
+<line x1="24" y1="22" x2="24" y2="10" stroke="#bbbbbb" stroke-width="3.4" stroke-linecap="round"/>
+<line x1="24" y1="10" x2="72" y2="10" stroke="#bbbbbb" stroke-width="3.4" stroke-linecap="round"/>
+<line x1="72" y1="10" x2="72" y2="22" stroke="#bbbbbb" stroke-width="3.4" stroke-linecap="round"/>
+<line x1="24" y1="22" x2="24" y2="46" stroke="#bbbbbb" stroke-width="3.4" stroke-linecap="round"/>
+<line x1="24" y1="46" x2="72" y2="46" stroke="#bbbbbb" stroke-width="3.4" stroke-linecap="round"/>
+<line x1="72" y1="46" x2="72" y2="22" stroke="#bbbbbb" stroke-width="3.4" stroke-linecap="round"/>
+<line x1="72" y1="22" x2="88" y2="22" stroke="#bbbbbb" stroke-width="3.4" stroke-linecap="round"/>
+<line x1="88" y1="22" x2="88" y2="44" stroke="#bbbbbb" stroke-width="3.4" stroke-linecap="round"/>
+<polygon points="28,5 68,5 68,15 28,15" fill="none" stroke="#bfd732" stroke-width="0.6" stroke-dasharray="1.5 1"/>
+<text x="29" y="4.2" font-size="2.4" font-weight="bold">Aisle A</text>
+<polygon points="28,41 68,41 68,51 28,51" fill="none" stroke="#bfd732" stroke-width="0.6" stroke-dasharray="1.5 1"/>
+<text x="29" y="40.2" font-size="2.4" font-weight="bold">Aisle B</text>
+<polygon points="75,17 85,17 85,27 75,27" fill="none" stroke="#bfd732" stroke-width="0.6" stroke-dasharray="1.5 1"/>
+<text x="76" y="16.2" font-size="2.4" font-weight="bold">Dock lane</text>
+<circle cx="8" cy="22" r="2" fill="white" stroke="black" stroke-width="0.3"/>
+<text x="8" y="27" font-size="2.2" text-anchor="middle">Storage</text>
+<circle cx="24" cy="22" r="2" fill="white" stroke="black" stroke-width="0.3"/>
+<text x="24" y="27" font-size="2.2" text-anchor="middle">Wait West</text>
+<circle cx="24" cy="10" r="2" fill="white" stroke="black" stroke-width="0.3"/>
+<circle cx="72" cy="10" r="2" fill="white" stroke="black" stroke-width="0.3"/>
+<circle cx="24" cy="46" r="2" fill="white" stroke="black" stroke-width="0.3"/>
+<circle cx="72" cy="46" r="2" fill="white" stroke="black" stroke-width="0.3"/>
+<circle cx="72" cy="22" r="2" fill="white" stroke="black" stroke-width="0.3"/>
+<text x="72" y="27" font-size="2.2" text-anchor="middle">Wait East</text>
+<circle cx="88" cy="22" r="2" fill="white" stroke="black" stroke-width="0.3"/>
+<text x="88" y="27" font-size="2.2" text-anchor="middle">Packing</text>
+<circle cx="88" cy="44" r="2" fill="white" stroke="black" stroke-width="0.3"/>
+<text x="88" y="49" font-size="2.2" text-anchor="middle">Dispatch</text>
+<rect x="-1.5" y="-1.5" width="3" height="3" fill="black"/>
+<text x="4" y="5" font-size="2.6" font-weight="bold" text-anchor="middle">1</text>
+<rect x="98.5" y="-1.5" width="3" height="3" fill="black"/>
+<text x="96" y="5" font-size="2.6" font-weight="bold" text-anchor="middle">2</text>
+<rect x="98.5" y="54.5" width="3" height="3" fill="black"/>
+<text x="96" y="53" font-size="2.6" font-weight="bold" text-anchor="middle">3</text>
+<rect x="-1.5" y="54.5" width="3" height="3" fill="black"/>
+<text x="4" y="53" font-size="2.6" font-weight="bold" text-anchor="middle">4</text>
+</svg>

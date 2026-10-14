@@ -1,0 +1,331 @@
+<template>
+  <style>
+    /* Fonts: frame.md families. Sources are project-root relative. */
+    @font-face {
+      font-family: "Heebo";
+      font-weight: 700;
+      font-style: normal;
+      font-display: block;
+      src:
+        local("Heebo Bold"),
+        local("Heebo-Bold"),
+        local("Heebo"),
+        url("assets/fonts/Heebo-700.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "IBM Plex Mono";
+      font-weight: 400;
+      font-style: normal;
+      font-display: block;
+      src:
+        local("IBM Plex Mono"),
+        local("IBMPlexMono-Regular"),
+        url("assets/fonts/IBMPlexMono-400.woff2") format("woff2");
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      color: #ffffff;
+      font-family: "Heebo", sans-serif;
+    }
+
+    /* Full-bleed ground lives on a clip layer, never on #root. */
+    [class~="06-rules-bg"] {
+      position: absolute;
+      inset: 0;
+      background: #0a0a0a;
+    }
+
+    /* Camera wrapper: slow push-in runs underneath the reveals. */
+    [class~="06-rules-world"] {
+      position: absolute;
+      inset: 0;
+      transform-origin: 50% 42%;
+      will-change: transform;
+    }
+
+    /* Rule stub: 36x2 lime, the system's only ornament. */
+    [class~="06-rules-stub"] {
+      position: absolute;
+      left: 106px;
+      top: 122px;
+      width: 36px;
+      height: 2px;
+      background: #bfd732;
+      transform-origin: 0% 50%;
+    }
+
+    /* Headline: h2 role, 4.5cqw = 86px, lowercase, upper-left. */
+    [class~="06-rules-headline"] {
+      position: absolute;
+      left: 106px;
+      top: 156px;
+      width: 1498px;
+      margin: 0;
+      font-family: "Heebo", sans-serif;
+      font-weight: 700;
+      font-size: 86px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      text-transform: lowercase;
+      color: #ffffff;
+      white-space: nowrap;
+    }
+    [class~="06-rules-hword"] {
+      display: inline-block;
+      will-change: transform, opacity;
+    }
+
+    /* Triptych row: three equal thirds, left / middle / right. */
+    [class~="06-rules-row"] {
+      position: absolute;
+      left: 106px;
+      top: 452px;
+      width: 1708px;
+      height: 400px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 67px;
+    }
+    [class~="06-rules-card"] {
+      position: relative;
+      height: 400px;
+    }
+    /* Top-border-only card: the hairline is its own element so it can draw in. */
+    [class~="06-rules-border"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 1px;
+      background: #2c2c2c;
+      transform-origin: 0% 50%;
+    }
+    [class~="06-rules-border-accent"] {
+      height: 2px;
+      background: #bfd732;
+    }
+    [class~="06-rules-body"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      padding-top: 38px;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+    [class~="06-rules-num"] {
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #a3a3a3;
+    }
+    [class~="06-rules-num-accent"] {
+      color: #bfd732;
+    }
+    [class~="06-rules-line"] {
+      margin: 44px 0 0 0;
+      font-family: "Heebo", sans-serif;
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      text-transform: lowercase;
+      color: #ffffff;
+    }
+    [class~="06-rules-word"] {
+      display: inline-block;
+    }
+    [class~="06-rules-mono"] {
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 400;
+      font-size: 42px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+  </style>
+
+  <div id="root" data-composition-id="06-rules" data-width="1920" data-height="1080" data-duration="11.828">
+    <div class="clip 06-rules-bg" data-start="0" data-duration="11.828" data-track-index="0"></div>
+
+    <div class="06-rules-world">
+      <div class="06-rules-stub"></div>
+
+      <h2 class="06-rules-headline">
+        <span class="06-rules-hword">three</span>
+        <span class="06-rules-hword">rules</span>
+        <span class="06-rules-hword">it</span>
+        <span class="06-rules-hword">will</span>
+        <span class="06-rules-hword">not</span>
+        <span class="06-rules-hword">break.</span>
+      </h2>
+
+      <div class="06-rules-row">
+        <div class="06-rules-card">
+          <div class="06-rules-border"></div>
+          <div class="06-rules-body">
+            <div class="06-rules-num">01</div>
+            <p class="06-rules-line">
+              <span class="06-rules-word">a</span>
+              <span class="06-rules-word">missed</span>
+              <span class="06-rules-word">detection</span>
+              <span class="06-rules-word">never</span>
+              <span class="06-rules-word">clears</span>
+              <span class="06-rules-word">an</span>
+              <span class="06-rules-word">aisle.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="06-rules-card">
+          <div class="06-rules-border"></div>
+          <div class="06-rules-body">
+            <div class="06-rules-num">02</div>
+            <p class="06-rules-line">
+              <span class="06-rules-word">a</span>
+              <span class="06-rules-word">covered</span>
+              <span class="06-rules-word">camera</span>
+              <span class="06-rules-word">turns</span>
+              <span class="06-rules-word">every</span>
+              <span class="06-rules-word">zone</span>
+              <span class="06-rules-word 06-rules-mono">unknown</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="06-rules-card">
+          <div class="06-rules-border 06-rules-border-accent"></div>
+          <div class="06-rules-body">
+            <div class="06-rules-num 06-rules-num-accent">03</div>
+            <p class="06-rules-line">
+              <span class="06-rules-word">every</span>
+              <span class="06-rules-word">decision</span>
+              <span class="06-rules-word">keeps</span>
+              <span class="06-rules-word">the</span>
+              <span class="06-rules-word">frame</span>
+              <span class="06-rules-word">that</span>
+              <span class="06-rules-word">caused</span>
+              <span class="06-rules-word">it.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var FRAME_ID = "06-rules";
+      var DURATION = 11.328;
+      var root = document.querySelector('[data-composition-id="' + FRAME_ID + '"]');
+      var all = function (cls) {
+        return Array.prototype.slice.call(
+          root.querySelectorAll('[class~="' + FRAME_ID + "-" + cls + '"]'),
+        );
+      };
+
+      var tl = gsap.timeline({ paused: true });
+
+      // dynamic-content-sequencing: each word's slot is computed once from its
+      // length (BASE + chars x SEC_PER_CHAR), then fitted to the spoken window.
+      var BASE = 0.14;
+      var SEC_PER_CHAR = 0.04;
+      function sequence(els, startAt, span) {
+        var weights = els.map(function (el) {
+          return BASE + el.textContent.trim().length * SEC_PER_CHAR;
+        });
+        var total = weights.reduce(function (a, b) {
+          return a + b;
+        }, 0);
+        var k = span ? span / total : 1;
+        var cumulative = startAt;
+        return els.map(function (el, i) {
+          var start = cumulative;
+          cumulative += weights[i] * k;
+          return { el: el, start: start };
+        });
+      }
+
+      // Macro camera: slow push-in under the whole build, resting before the
+      // final hold so the triptych sits still.
+      tl.fromTo(
+        all("world")[0],
+        { scale: 1 },
+        { scale: 1.022, duration: 10.0, ease: "power1.out" },
+        0,
+      );
+
+      // Scene 1 (0.0-2.3s): rule stub, then the headline per word.
+      tl.fromTo(
+        all("stub")[0],
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.4, ease: "power3.out" },
+        0.05,
+      );
+      sequence(all("hword"), 0.15, 0).forEach(function (w) {
+        tl.fromTo(
+          w.el,
+          { opacity: 0, y: 28 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          w.start,
+        );
+      });
+
+      // Scenes 2-4: one card per spoken rule, each into its own third.
+      var CARD_CUES = [
+        { at: 2.3, readSpan: 1.9 },
+        { at: 4.9, readSpan: 2.1 },
+        { at: 7.7, readSpan: 2.4 },
+      ];
+      var cards = all("card");
+      cards.forEach(function (card, i) {
+        var cue = CARD_CUES[i];
+        var border = card.querySelector('[class~="' + FRAME_ID + '-border"]');
+        var body = card.querySelector('[class~="' + FRAME_ID + '-body"]');
+        var words = Array.prototype.slice.call(
+          card.querySelectorAll('[class~="' + FRAME_ID + '-word"]'),
+        );
+
+        // Hairline draws across the slot.
+        tl.fromTo(
+          border,
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.55, ease: "power3.out" },
+          cue.at,
+        );
+
+        // spring-pop-entrance: scale 0 -> 1 on a smooth power3 settle, no overshoot.
+        tl.fromTo(
+          body,
+          { scale: 0, opacity: 0, y: 24 },
+          { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          cue.at + 0.08,
+        );
+
+        // The sentence lights word by word as the voice reaches it.
+        sequence(words, cue.at + 0.3, cue.readSpan).forEach(function (w) {
+          tl.fromTo(
+            w.el,
+            { opacity: 0.22 },
+            { opacity: 1, duration: 0.3, ease: "power2.out" },
+            w.start,
+          );
+        });
+      });
+
+      // Pad to the fixed frame duration; the triptych holds still to the end.
+      tl.set({}, {}, DURATION);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines[FRAME_ID] = tl;
+    })();
+  </script>
+</template>

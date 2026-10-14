@@ -1,0 +1,288 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Heebo";
+      font-weight: 800;
+      font-style: normal;
+      font-display: block;
+      src:
+        local("Heebo ExtraBold"),
+        local("Heebo-ExtraBold"),
+        url("assets/fonts/Heebo-800.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "IBM Plex Mono";
+      font-weight: 400;
+      font-style: normal;
+      font-display: block;
+      src:
+        local("IBM Plex Mono"),
+        local("IBMPlexMono-Regular"),
+        url("assets/fonts/IBMPlexMono-400.woff2") format("woff2");
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      color: #ffffff;
+    }
+
+    /* full-bleed dark ground (lowest track) */
+    [class~="02-promise-ground"] {
+      position: absolute;
+      inset: 0;
+      background: #0a0a0a;
+    }
+
+    /* content band = everything above the caption keep-out (y <= 896) */
+    [class~="02-promise-band"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 896px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ---------- dark register: the three verb beats ---------- */
+    [class~="02-promise-stage"] {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    [class~="02-promise-lines"] {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+    }
+    [class~="02-promise-line"] {
+      grid-area: 1 / 1;
+      font-family: "Heebo", sans-serif;
+      font-weight: 800;
+      font-size: 144px;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      text-transform: lowercase;
+      white-space: nowrap;
+      color: #ffffff;
+    }
+    [class~="02-promise-ticks"] {
+      display: flex;
+      gap: 14px;
+      margin-top: 64px;
+    }
+    [class~="02-promise-tick"] {
+      width: 36px;
+      height: 2px;
+      background: #2c2c2c;
+    }
+
+    /* ---------- lime register: the wordmark resolve ---------- */
+    [class~="02-promise-lime"] {
+      position: absolute;
+      inset: 0;
+      background: #bfd732;
+      transform-origin: 50% 448px;
+    }
+    [class~="02-promise-mark"] {
+      font-family: "Heebo", sans-serif;
+      font-weight: 800;
+      font-size: 250px;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
+      white-space: nowrap;
+      color: #0a0a0a;
+    }
+    [class~="02-promise-stub"] {
+      width: 36px;
+      height: 2px;
+      margin-top: 44px;
+      background: #0a0a0a;
+    }
+    [class~="02-promise-mono"] {
+      margin-top: 26px;
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: rgba(17, 17, 17, 0.75);
+    }
+  </style>
+
+  <div id="root" data-composition-id="02-promise" data-width="1920" data-height="1080" data-duration="5.101">
+    <!-- track 0: dark ground -->
+    <div
+      class="clip 02-promise-ground"
+      data-start="0"
+      data-duration="5.101"
+      data-track-index="0"
+    ></div>
+
+    <!-- track 1: verb beats (dark register) -->
+    <div
+      class="clip 02-promise-band"
+      data-start="0"
+      data-duration="5.101"
+      data-track-index="1"
+    >
+      <div class="02-promise-stage" id="02-promise-stage">
+        <div class="02-promise-lines">
+          <div class="02-promise-line" id="02-promise-l1">sees it.</div>
+          <div class="02-promise-line" id="02-promise-l2">replans the delivery.</div>
+          <div class="02-promise-line" id="02-promise-l3">
+            shows the <span id="02-promise-accent">evidence.</span>
+          </div>
+        </div>
+        <div class="02-promise-ticks" aria-hidden="true">
+          <i class="02-promise-tick" id="02-promise-t1"></i>
+          <i class="02-promise-tick" id="02-promise-t2"></i>
+          <i class="02-promise-tick" id="02-promise-t3"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- track 2: lime ground (register flip) -->
+    <div
+      class="clip 02-promise-lime"
+      id="02-promise-lime"
+      data-start="0"
+      data-duration="5.101"
+      data-track-index="2"
+    ></div>
+
+    <!-- track 3: wordmark resolve (lime register) -->
+    <div
+      class="clip 02-promise-band"
+      data-start="0"
+      data-duration="5.101"
+      data-track-index="3"
+    >
+      <div class="02-promise-mark" id="02-promise-mark">flowtwin</div>
+      <div class="02-promise-stub" id="02-promise-stub"></div>
+      <div class="02-promise-mono" id="02-promise-mono">SEE IT / REPLAN IT / PROVE IT</div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var ID = "02-promise";
+      var DUR = 4.501;
+      // One beat array drives every phase (voiceover cues).
+      var BEATS = [0.1, 1.0, 2.3, 3.3];
+      var T_ACCENT = 2.9; // "evidence" takes the accent as the voice reaches it
+
+      var $ = function (s) {
+        return document.getElementById(ID + "-" + s);
+      };
+      var lines = [$("l1"), $("l2"), $("l3")];
+      var ticks = [$("t1"), $("t2"), $("t3")];
+      var accent = $("accent");
+      var stage = $("stage");
+
+      // discrete-text-sequence: sparse states, reverse-searched every frame.
+      var SEQUENCE = [
+        { t: 0.0, line: 0, accent: false },
+        { t: BEATS[1], line: 1, accent: false },
+        { t: BEATS[2], line: 2, accent: false },
+        { t: T_ACCENT, line: 2, accent: true },
+      ];
+      function stateAt(time) {
+        for (var i = SEQUENCE.length - 1; i >= 0; i--) {
+          if (time >= SEQUENCE[i].t) return SEQUENCE[i];
+        }
+        return SEQUENCE[0];
+      }
+      function render(time) {
+        var s = stateAt(time);
+        for (var i = 0; i < lines.length; i++) {
+          lines[i].style.visibility = i === s.line ? "visible" : "hidden";
+          ticks[i].style.background = i <= s.line ? "#BFD732" : "#2C2C2C";
+        }
+        accent.style.color = s.accent ? "#BFD732" : "#FFFFFF";
+      }
+
+      var tl = gsap.timeline({ paused: true });
+
+      var driver = { t: 0 };
+      tl.to(
+        driver,
+        {
+          t: DUR,
+          duration: DUR,
+          ease: "none",
+          onUpdate: function () {
+            render(driver.t);
+          },
+        },
+        0,
+      );
+      render(0);
+
+      // Scene 1 — "sees it." slams in (kinetic-beat-slam: scale + blur hit).
+      tl.fromTo(
+        lines[0],
+        { scale: 1.5, filter: "blur(16px)", opacity: 0 },
+        { scale: 1, filter: "blur(0px)", opacity: 1, duration: 0.42, ease: "power4.out" },
+        BEATS[0],
+      );
+
+      // Scene 2 — instant hard cut to "replans the delivery."; side-snap settle.
+      tl.fromTo(
+        stage,
+        { x: -44 },
+        { x: 0, duration: 0.32, ease: "expo.out", immediateRender: false },
+        BEATS[1],
+      );
+
+      // Scene 3 — instant hard cut to "shows the evidence."; rise settle.
+      tl.fromTo(
+        stage,
+        { y: 34 },
+        { y: 0, duration: 0.36, ease: "circ.out", immediateRender: false },
+        BEATS[2],
+      );
+
+      // Scene 4 — scale-swap handoff: line shrinks away, register flips to lime,
+      // wordmark arrives at the same centre, then holds still.
+      tl.to(stage, { scale: 0.55, opacity: 0, duration: 0.2, ease: "power3.in" }, BEATS[3]);
+      tl.fromTo(
+        $("lime"),
+        { scaleY: 0 },
+        { scaleY: 1, duration: 0.24, ease: "expo.out" },
+        BEATS[3] + 0.1,
+      );
+      tl.fromTo(
+        $("mark"),
+        { scale: 1.4, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.4, ease: "expo.out" },
+        BEATS[3] + 0.2,
+      );
+      tl.fromTo(
+        $("stub"),
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.2, ease: "power2.out" },
+        BEATS[3] + 0.48,
+      );
+      tl.fromTo(
+        $("mono"),
+        { y: 14, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.28, ease: "power3.out" },
+        BEATS[3] + 0.54,
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines[ID] = tl;
+    })();
+  </script>
+</template>

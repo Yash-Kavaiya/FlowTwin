@@ -1,0 +1,451 @@
+{
+  "id": "warehouse",
+  "name": "Warehouse aisle dispatch",
+  "use_case": {
+    "buyer": "Warehouse operations manager",
+    "problem": "A pallet or spill blocks a picking aisle and the delivery stalls until someone radios the dispatcher.",
+    "response": "The aisle is marked blocked from the camera view and the delivery is sent down the parallel aisle. If both are blocked it holds at the wait point.",
+    "metric": "Minutes of delivery delay avoided per blocked-aisle event"
+  },
+  "version": 1,
+  "width": 100,
+  "height": 56,
+  "speed": 8.0,
+  "turn_cost_s": 0.5,
+  "nodes": [
+    {
+      "id": "S",
+      "label": "Storage",
+      "kind": "storage",
+      "x": 8,
+      "y": 22
+    },
+    {
+      "id": "W",
+      "label": "Wait West",
+      "kind": "wait",
+      "x": 24,
+      "y": 22
+    },
+    {
+      "id": "A1",
+      "label": "A in",
+      "kind": "aisle",
+      "x": 24,
+      "y": 10
+    },
+    {
+      "id": "A2",
+      "label": "A out",
+      "kind": "aisle",
+      "x": 72,
+      "y": 10
+    },
+    {
+      "id": "B1",
+      "label": "B in",
+      "kind": "aisle",
+      "x": 24,
+      "y": 46
+    },
+    {
+      "id": "B2",
+      "label": "B out",
+      "kind": "aisle",
+      "x": 72,
+      "y": 46
+    },
+    {
+      "id": "E",
+      "label": "Wait East",
+      "kind": "wait",
+      "x": 72,
+      "y": 22
+    },
+    {
+      "id": "P",
+      "label": "Packing",
+      "kind": "packing",
+      "x": 88,
+      "y": 22
+    },
+    {
+      "id": "D",
+      "label": "Dispatch",
+      "kind": "dispatch",
+      "x": 88,
+      "y": 44
+    }
+  ],
+  "edges": [
+    {
+      "a": "S",
+      "b": "W"
+    },
+    {
+      "a": "W",
+      "b": "A1"
+    },
+    {
+      "a": "A1",
+      "b": "A2",
+      "zone": "A"
+    },
+    {
+      "a": "A2",
+      "b": "E"
+    },
+    {
+      "a": "W",
+      "b": "B1"
+    },
+    {
+      "a": "B1",
+      "b": "B2",
+      "zone": "B"
+    },
+    {
+      "a": "B2",
+      "b": "E"
+    },
+    {
+      "a": "E",
+      "b": "P",
+      "zone": "C"
+    },
+    {
+      "a": "P",
+      "b": "D"
+    }
+  ],
+  "zones": [
+    {
+      "id": "A",
+      "label": "Aisle A",
+      "polygon": [
+        [
+          28,
+          5
+        ],
+        [
+          68,
+          5
+        ],
+        [
+          68,
+          15
+        ],
+        [
+          28,
+          15
+        ]
+      ]
+    },
+    {
+      "id": "B",
+      "label": "Aisle B",
+      "polygon": [
+        [
+          28,
+          41
+        ],
+        [
+          68,
+          41
+        ],
+        [
+          68,
+          51
+        ],
+        [
+          28,
+          51
+        ]
+      ]
+    },
+    {
+      "id": "C",
+      "label": "Dock lane",
+      "polygon": [
+        [
+          75,
+          17
+        ],
+        [
+          85,
+          17
+        ],
+        [
+          85,
+          27
+        ],
+        [
+          75,
+          27
+        ]
+      ]
+    }
+  ],
+  "structures": [
+    {
+      "kind": "rack",
+      "label": "High-bay racking",
+      "x": 48,
+      "y": 21,
+      "w": 36,
+      "d": 3.5,
+      "h": 7
+    },
+    {
+      "kind": "rack",
+      "x": 48,
+      "y": 28,
+      "w": 36,
+      "d": 3.5,
+      "h": 7
+    },
+    {
+      "kind": "rack",
+      "x": 48,
+      "y": 35,
+      "w": 36,
+      "d": 3.5,
+      "h": 7
+    },
+    {
+      "kind": "rack",
+      "x": 48,
+      "y": 2.2,
+      "w": 36,
+      "d": 3,
+      "h": 7
+    },
+    {
+      "kind": "rack",
+      "x": 48,
+      "y": 53.6,
+      "w": 36,
+      "d": 3,
+      "h": 7
+    },
+    {
+      "kind": "dock",
+      "label": "Receiving docks",
+      "x": 1.2,
+      "y": 42,
+      "w": 2,
+      "d": 24,
+      "h": 7
+    },
+    {
+      "kind": "truck",
+      "label": "Inbound trailer",
+      "x": 9,
+      "y": 36,
+      "w": 12,
+      "d": 5,
+      "h": 6
+    },
+    {
+      "kind": "pallet",
+      "label": "Inbound staging",
+      "x": 7,
+      "y": 45,
+      "w": 5,
+      "d": 5,
+      "h": 3
+    },
+    {
+      "kind": "pallet",
+      "x": 13.5,
+      "y": 45,
+      "w": 5,
+      "d": 5,
+      "h": 2
+    },
+    {
+      "kind": "pallet",
+      "x": 7,
+      "y": 51.5,
+      "w": 5,
+      "d": 5,
+      "h": 2.5
+    },
+    {
+      "kind": "pallet",
+      "x": 13.5,
+      "y": 51.5,
+      "w": 5,
+      "d": 5,
+      "h": 3.4
+    },
+    {
+      "kind": "pallet",
+      "x": 6,
+      "y": 10,
+      "w": 5,
+      "d": 5,
+      "h": 3
+    },
+    {
+      "kind": "pallet",
+      "x": 13,
+      "y": 10,
+      "w": 5,
+      "d": 5,
+      "h": 2
+    },
+    {
+      "kind": "charger",
+      "label": "Charging bay",
+      "x": 12,
+      "y": 3,
+      "w": 7,
+      "d": 4,
+      "h": 2.4
+    },
+    {
+      "kind": "conveyor",
+      "label": "Outbound conveyor",
+      "x": 79,
+      "y": 38,
+      "w": 3,
+      "d": 18,
+      "h": 1.6
+    },
+    {
+      "kind": "bench",
+      "label": "Packing stations",
+      "x": 95,
+      "y": 17,
+      "w": 4,
+      "d": 8,
+      "h": 2
+    },
+    {
+      "kind": "bench",
+      "x": 95,
+      "y": 27,
+      "w": 4,
+      "d": 8,
+      "h": 2
+    },
+    {
+      "kind": "office",
+      "label": "Control room",
+      "x": 92,
+      "y": 6,
+      "w": 12,
+      "d": 9,
+      "h": 6
+    },
+    {
+      "kind": "dock",
+      "label": "Dispatch docks",
+      "x": 88,
+      "y": 54.6,
+      "w": 20,
+      "d": 2,
+      "h": 7
+    },
+    {
+      "kind": "truck",
+      "label": "Outbound trailer",
+      "x": 96,
+      "y": 43,
+      "w": 5,
+      "d": 13,
+      "h": 6
+    }
+  ],
+  "order": {
+    "source": "S",
+    "dest": "D"
+  },
+  "workers": [
+    {
+      "path": [
+        [
+          91,
+          12
+        ],
+        [
+          91,
+          31
+        ],
+        [
+          86,
+          31
+        ],
+        [
+          86,
+          12
+        ]
+      ],
+      "speed": 1.6
+    },
+    {
+      "path": [
+        [
+          4,
+          40
+        ],
+        [
+          18,
+          40
+        ],
+        [
+          18,
+          55
+        ],
+        [
+          4,
+          55
+        ]
+      ],
+      "speed": 1.3
+    },
+    {
+      "path": [
+        [
+          83,
+          49
+        ],
+        [
+          83,
+          30
+        ],
+        [
+          76,
+          30
+        ],
+        [
+          76,
+          49
+        ]
+      ],
+      "speed": 1.5
+    },
+    {
+      "path": [
+        [
+          20,
+          4
+        ],
+        [
+          20,
+          16
+        ],
+        [
+          4,
+          16
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "speed": 1.2
+    }
+  ]
+}

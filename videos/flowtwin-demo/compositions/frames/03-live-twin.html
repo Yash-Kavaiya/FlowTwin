@@ -1,0 +1,376 @@
+<template>
+  <div
+    id="root"
+    data-composition-id="03-live-twin"
+    data-start="0"
+    data-duration="7.519"
+    data-width="1920"
+    data-height="1080"
+  >
+    <style>
+      @font-face {
+        font-family: "IBM Plex Mono";
+        src: url("assets/fonts/IBMPlexMono-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: block;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+
+      /* full-bleed ground — a clip layer, never the root */
+      .lt03-ground {
+        position: absolute;
+        inset: 0;
+        background: #0a0a0a;
+        container-type: size;
+      }
+
+      .lt03-stage {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* camera viewport = the caption-safe region (cutoff y = 896) */
+      .lt03-viewport {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 896px;
+        overflow: hidden;
+      }
+
+      /* the one world: everything at final wide layout from frame 0 */
+      .lt03-world {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 896px;
+        transform-origin: 0 0;
+        will-change: transform;
+      }
+
+      /* flat plate: real screenshot, cropped to the 3D scene (src x 0-1530, y 50-905) at 0.9 */
+      .lt03-plate {
+        position: absolute;
+        left: 300px;
+        top: 63px;
+        width: 1377px;
+        height: 770px;
+        overflow: hidden;
+        background: #141414;
+      }
+      .lt03-plate img {
+        position: absolute;
+        left: 0;
+        top: -45px;
+        width: 1728px;
+        height: 972px;
+        display: block;
+      }
+      .lt03-plate-edge {
+        position: absolute;
+        inset: 0;
+        border: 1px solid #2c2c2c;
+      }
+
+      .lt03-lines {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 896px;
+        overflow: visible;
+      }
+      .lt03-leader {
+        fill: none;
+        stroke: #ffffff;
+        stroke-width: 1;
+      }
+      .lt03-dot {
+        fill: #ffffff;
+      }
+      .lt03-zone {
+        fill: none;
+        stroke: #bfd732;
+        stroke-width: 2;
+        stroke-linejoin: miter;
+      }
+      .lt03-zone-fill {
+        fill: #bfd732;
+      }
+
+      .lt03-label {
+        position: absolute;
+        height: 28px;
+        line-height: 28px;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 400;
+        font-size: 22px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        color: #ffffff;
+      }
+      .lt03-label-docks {
+        left: 64px;
+        top: 378px;
+      }
+      .lt03-label-racking {
+        left: 64px;
+        top: 508px;
+      }
+      .lt03-label-conveyor {
+        left: 1720px;
+        top: 589px;
+      }
+
+      .lt03-zone-tag {
+        position: absolute;
+        left: 943px;
+        top: 194px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        background: #bfd732;
+        color: #0a0a0a;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 400;
+        font-size: 20px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      /* kicker sits outside the camera so it stays put through the pull-back */
+      .lt03-kicker {
+        position: absolute;
+        left: 52px;
+        top: 63px;
+        height: 36px;
+        line-height: 36px;
+        padding: 0 12px;
+        background: #0a0a0a;
+        color: #bfd732;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 400;
+        font-size: 22px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+    </style>
+
+    <div
+      class="clip lt03-ground"
+      data-start="0"
+      data-duration="7.519"
+      data-track-index="0"
+    ></div>
+
+    <div
+      class="clip lt03-stage"
+      data-start="0"
+      data-duration="7.519"
+      data-track-index="1"
+    >
+      <div class="lt03-viewport">
+        <div class="lt03-world" id="lt03-world">
+          <div class="lt03-plate">
+            <img src="assets/01-idle.png" alt="" />
+            <div class="lt03-plate-edge"></div>
+          </div>
+
+          <svg
+            class="lt03-lines"
+            viewBox="0 0 1920 896"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- leaders are authored target -> label, so the draw starts on the plate and lands on the word -->
+            <path class="lt03-leader" id="lt03-leader-racking" d="M 723 522 L 194 522" />
+            <rect class="lt03-dot" id="lt03-dot-racking" x="719" y="518" width="8" height="8" />
+
+            <path class="lt03-leader" id="lt03-leader-docks" d="M 466 392 L 162 392" />
+            <rect class="lt03-dot" id="lt03-dot-docks" x="462" y="388" width="8" height="8" />
+
+            <path class="lt03-leader" id="lt03-leader-conveyor" d="M 1209 603 L 1704 603" />
+            <rect class="lt03-dot" id="lt03-dot-conveyor" x="1205" y="599" width="8" height="8" />
+
+            <!-- Aisle A zone: src x 716-1084, y 236-424 -->
+            <rect
+              class="lt03-zone-fill"
+              id="lt03-zone-fill"
+              x="944"
+              y="230"
+              width="332"
+              height="170"
+            />
+            <path class="lt03-zone" id="lt03-zone" d="M 944 230 H 1276 V 400 H 944 Z" />
+          </svg>
+
+          <div class="lt03-label lt03-label-racking" id="lt03-label-racking">Racking</div>
+          <div class="lt03-label lt03-label-docks" id="lt03-label-docks">Docks</div>
+          <div class="lt03-label lt03-label-conveyor" id="lt03-label-conveyor">Conveyor</div>
+          <div class="lt03-zone-tag" id="lt03-zone-tag">Observed zone</div>
+        </div>
+      </div>
+
+      <div class="lt03-kicker" id="lt03-kicker">Live 3D twin</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      (function () {
+        var FRAME_ID = "03-live-twin";
+        var DURATION = 7.019;
+
+        var root = document.querySelector('[data-composition-id="' + FRAME_ID + '"]') || document;
+        function q(id) {
+          return root.querySelector("#" + id);
+        }
+
+        var tl = gsap.timeline({ paused: true });
+        window.__timelines = window.__timelines || {};
+        window.__timelines[FRAME_ID] = tl;
+
+        /* ---------- camera: one world, one writer, outward only ---------- */
+        var world = q("lt03-world");
+        var S0 = 2.4; // tight open: racking rows fill the viewport
+        var S_DWELL = 2.28; // gentle pre-reveal pull (< 15% of travel)
+        var FOCUS_X = 948; // racking centre in world px (src 720, 470)
+        var FOCUS_Y = 441;
+        var VIEW_CX = 960;
+        var VIEW_CY = 448;
+        var TX0 = VIEW_CX - S0 * FOCUS_X;
+        var TY0 = VIEW_CY - S0 * FOCUS_Y;
+
+        var cam = { s: S0 };
+        function writeCam() {
+          var u = (cam.s - 1) / (S0 - 1);
+          world.style.transform =
+            "translate(" + TX0 * u + "px," + TY0 * u + "px) scale(" + cam.s + ")";
+        }
+        writeCam();
+
+        var REVEAL_AT = 1.8;
+        var REVEAL_DUR = 2.0; // decelerates to a full stop at 3.8s, then LOCKED
+
+        // Scene 1 — tight on the racking, barely breathing outward
+        tl.fromTo(
+          cam,
+          { s: S0 },
+          { s: S_DWELL, duration: REVEAL_AT, ease: "none", onUpdate: writeCam },
+          0,
+        );
+        // Scene 2 — the single decelerating zoom-out
+        tl.fromTo(
+          cam,
+          { s: S_DWELL },
+          {
+            s: 1,
+            duration: REVEAL_DUR,
+            ease: "expo.out",
+            immediateRender: false,
+            onUpdate: writeCam,
+          },
+          REVEAL_AT,
+        );
+
+        // kicker
+        tl.fromTo(
+          q("lt03-kicker"),
+          { opacity: 0, x: -12 },
+          { opacity: 1, x: 0, duration: 0.45, ease: "power2.out" },
+          0.2,
+        );
+
+        /* ---------- svg draw setup (measured lengths) ---------- */
+        function prepDraw(el, fallback) {
+          var len = fallback;
+          try {
+            var m = el.getTotalLength();
+            if (m && isFinite(m)) len = m;
+          } catch (e) {}
+          len = Math.ceil(len * 1.02);
+          el.style.strokeDasharray = String(len);
+          el.style.strokeDashoffset = String(len);
+          return len;
+        }
+
+        /* ---------- Scene 2 callouts: starts computed from content, once ---------- */
+        var CALLOUTS = [
+          { key: "racking", text: "RACKING", fallback: 529, hold: 0 },
+          { key: "docks", text: "DOCKS", fallback: 304, hold: 0 },
+          { key: "conveyor", text: "CONVEYOR", fallback: 495, hold: 0 },
+        ];
+        var CALLOUT_START = 2.45;
+        var BASE_DURATION = 0.5;
+        var SEC_PER_CHAR = 0.02;
+        var LEADER_DUR = 0.4;
+
+        var cumulative = CALLOUT_START;
+        var SEQUENCE = CALLOUTS.map(function (entry) {
+          var dur = BASE_DURATION + entry.text.length * SEC_PER_CHAR + entry.hold;
+          var start = cumulative;
+          cumulative += dur;
+          return { key: entry.key, fallback: entry.fallback, start: start, end: cumulative };
+        });
+
+        SEQUENCE.forEach(function (item) {
+          var leader = q("lt03-leader-" + item.key);
+          var dot = q("lt03-dot-" + item.key);
+          var label = q("lt03-label-" + item.key);
+          prepDraw(leader, item.fallback);
+
+          tl.fromTo(
+            dot,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.15, ease: "power1.out" },
+            item.start,
+          );
+          tl.to(
+            leader,
+            { strokeDashoffset: 0, duration: LEADER_DUR, ease: "power2.out" },
+            item.start + 0.05,
+          );
+          tl.fromTo(
+            label,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.3, ease: "power1.out" },
+            item.start + 0.05 + LEADER_DUR * 0.75,
+          );
+        });
+
+        /* ---------- Scene 3: frame locked, lime outline draws around Aisle A ---------- */
+        var ZONE_AT = 4.7;
+        var ZONE_DUR = 0.8;
+        var zone = q("lt03-zone");
+        prepDraw(zone, 1004);
+
+        tl.to(zone, { strokeDashoffset: 0, duration: ZONE_DUR, ease: "power2.out" }, ZONE_AT);
+        tl.fromTo(
+          q("lt03-zone-fill"),
+          { opacity: 0 },
+          { opacity: 0.12, duration: 0.5, ease: "power1.out" },
+          ZONE_AT + ZONE_DUR,
+        );
+        tl.fromTo(
+          q("lt03-zone-tag"),
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+          ZONE_AT + ZONE_DUR * 0.75,
+        );
+
+        // hold still to the end of the shot — no exit
+        tl.set({}, {}, DURATION);
+      })();
+    </script>
+  </div>
+</template>

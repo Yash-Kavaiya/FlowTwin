@@ -1,0 +1,306 @@
+{
+  "id": "crossdock",
+  "name": "Cross-dock transfer",
+  "use_case": {
+    "buyer": "Cross-dock or parcel hub shift lead",
+    "problem": "A dropped parcel cage in the direct transfer lane holds up an outbound trailer that has a departure cut-off.",
+    "response": "The direct lane is marked blocked and the transfer takes the bypass lane. A blocked outbound gate holds the load at the merge point instead of queueing at the door.",
+    "metric": "Trailers that leave on time despite a lane obstruction"
+  },
+  "version": 1,
+  "width": 100,
+  "height": 56,
+  "speed": 8.0,
+  "turn_cost_s": 0.5,
+  "nodes": [
+    {
+      "id": "IN",
+      "label": "Inbound dock",
+      "kind": "storage",
+      "x": 10,
+      "y": 28
+    },
+    {
+      "id": "SORT",
+      "label": "Sort point",
+      "kind": "wait",
+      "x": 26,
+      "y": 28
+    },
+    {
+      "id": "B1",
+      "label": "Bypass in",
+      "kind": "aisle",
+      "x": 26,
+      "y": 10
+    },
+    {
+      "id": "B2",
+      "label": "Bypass out",
+      "kind": "aisle",
+      "x": 66,
+      "y": 10
+    },
+    {
+      "id": "M",
+      "label": "Merge point",
+      "kind": "wait",
+      "x": 66,
+      "y": 28
+    },
+    {
+      "id": "G",
+      "label": "Outbound gate",
+      "kind": "packing",
+      "x": 84,
+      "y": 28
+    },
+    {
+      "id": "T",
+      "label": "Truck bay",
+      "kind": "dispatch",
+      "x": 84,
+      "y": 46
+    }
+  ],
+  "edges": [
+    {
+      "a": "IN",
+      "b": "SORT"
+    },
+    {
+      "a": "SORT",
+      "b": "M",
+      "zone": "A"
+    },
+    {
+      "a": "SORT",
+      "b": "B1"
+    },
+    {
+      "a": "B1",
+      "b": "B2",
+      "zone": "B"
+    },
+    {
+      "a": "B2",
+      "b": "M"
+    },
+    {
+      "a": "M",
+      "b": "G",
+      "zone": "C"
+    },
+    {
+      "a": "G",
+      "b": "T"
+    }
+  ],
+  "zones": [
+    {
+      "id": "A",
+      "label": "Direct lane",
+      "polygon": [
+        [
+          30,
+          23
+        ],
+        [
+          62,
+          23
+        ],
+        [
+          62,
+          33
+        ],
+        [
+          30,
+          33
+        ]
+      ]
+    },
+    {
+      "id": "B",
+      "label": "Bypass lane",
+      "polygon": [
+        [
+          30,
+          5
+        ],
+        [
+          62,
+          5
+        ],
+        [
+          62,
+          15
+        ],
+        [
+          30,
+          15
+        ]
+      ]
+    },
+    {
+      "id": "C",
+      "label": "Gate approach",
+      "polygon": [
+        [
+          69,
+          23
+        ],
+        [
+          81,
+          23
+        ],
+        [
+          81,
+          33
+        ],
+        [
+          69,
+          33
+        ]
+      ]
+    }
+  ],
+  "structures": [
+    {
+      "kind": "truck",
+      "label": "Inbound trailers",
+      "x": 3.5,
+      "y": 20,
+      "w": 6,
+      "d": 12,
+      "h": 6
+    },
+    {
+      "kind": "truck",
+      "x": 3.5,
+      "y": 36,
+      "w": 6,
+      "d": 12,
+      "h": 6
+    },
+    {
+      "kind": "conveyor",
+      "label": "Sorter",
+      "x": 46,
+      "y": 19,
+      "w": 30,
+      "d": 2.5,
+      "h": 1.5
+    },
+    {
+      "kind": "cage",
+      "label": "Staging cages",
+      "x": 36,
+      "y": 44,
+      "w": 8,
+      "d": 8,
+      "h": 3.5
+    },
+    {
+      "kind": "cage",
+      "x": 48,
+      "y": 44,
+      "w": 8,
+      "d": 8,
+      "h": 3.5
+    },
+    {
+      "kind": "cage",
+      "x": 60,
+      "y": 44,
+      "w": 8,
+      "d": 8,
+      "h": 3.5
+    },
+    {
+      "kind": "truck",
+      "label": "Outbound trailer",
+      "x": 94,
+      "y": 46,
+      "w": 10,
+      "d": 6,
+      "h": 6
+    },
+    {
+      "kind": "dock",
+      "x": 97.5,
+      "y": 20,
+      "w": 2,
+      "d": 26,
+      "h": 7
+    }
+  ],
+  "order": {
+    "source": "IN",
+    "dest": "T"
+  },
+  "workers": [
+    {
+      "path": [
+        [
+          12,
+          12
+        ],
+        [
+          12,
+          44
+        ],
+        [
+          18,
+          44
+        ],
+        [
+          18,
+          12
+        ]
+      ],
+      "speed": 1.5
+    },
+    {
+      "path": [
+        [
+          30,
+          38
+        ],
+        [
+          66,
+          38
+        ],
+        [
+          66,
+          52
+        ],
+        [
+          30,
+          52
+        ]
+      ],
+      "speed": 1.4
+    },
+    {
+      "path": [
+        [
+          90,
+          22
+        ],
+        [
+          90,
+          40
+        ],
+        [
+          78,
+          40
+        ],
+        [
+          78,
+          22
+        ]
+      ],
+      "speed": 1.3
+    }
+  ]
+}
